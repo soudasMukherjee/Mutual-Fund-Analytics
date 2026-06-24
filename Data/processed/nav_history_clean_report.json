@@ -1,0 +1,12 @@
+{
+  "input_path": "C:\\Mutual Fund Analytics\\Data\\raw\\02_nav_history.csv",
+  "before_rows": 46000,
+  "invalid_date_rows_dropped": 0,
+  "invalid_nav_rows_dropped": 0,
+  "after_type_rows": 46000,
+  "duplicate_rows_removed_by_(amfi_code,date)": 0,
+  "total_original_rows_used": 46000,
+  "total_filled_rows_forward_filled": 18320,
+  "non_positive_nav_rows_removed": 0,
+  "output_rows": 64320
+}
