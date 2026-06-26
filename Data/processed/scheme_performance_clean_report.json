@@ -1,0 +1,24 @@
+{
+  "input_path": "C:\\Mutual Fund Analytics\\Data\\raw\\07_scheme_performance.csv",
+  "before_rows": 40,
+  "non_numeric_values_coerced_to_nan_by_column": {
+    "return_1yr_pct": 0,
+    "return_3yr_pct": 0,
+    "return_5yr_pct": 0,
+    "benchmark_3yr_pct": 0,
+    "alpha": 0,
+    "beta": 0,
+    "sharpe_ratio": 0,
+    "sortino_ratio": 0,
+    "std_dev_ann_pct": 0,
+    "max_drawdown_pct": 0,
+    "aum_crore": 0,
+    "expense_ratio_pct": 0,
+    "morningstar_rating": 0
+  },
+  "invalid_amfi_code_rows_dropped": 0,
+  "duplicate_amfi_code_rows_removed": 0,
+  "expense_ratio_out_of_range_0.1_to_2.5_pct": 0,
+  "rows_with_any_anomaly_flag": 3,
+  "output_rows": 40
+}

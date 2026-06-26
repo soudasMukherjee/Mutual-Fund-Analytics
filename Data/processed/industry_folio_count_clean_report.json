@@ -1,0 +1,18 @@
+{
+  "input_path": "C:\\Mutual Fund Analytics\\Data\\raw\\06_industry_folio_count.csv",
+  "before_rows": 21,
+  "non_numeric_total_folios_crore_coerced": 0,
+  "non_numeric_equity_folios_crore_coerced": 0,
+  "non_numeric_debt_folios_crore_coerced": 0,
+  "non_numeric_hybrid_folios_crore_coerced": 0,
+  "non_numeric_others_folios_crore_coerced": 0,
+  "duplicate_rows_removed": 0,
+  "negative_value_counts_by_column": {
+    "total_folios_crore": 0,
+    "equity_folios_crore": 0,
+    "debt_folios_crore": 0,
+    "hybrid_folios_crore": 0,
+    "others_folios_crore": 0
+  },
+  "output_rows": 21
+}

@@ -1,0 +1,21 @@
+{
+  "input_path": "C:\\Mutual Fund Analytics\\Data\\processed\\08_investor_transactions.csv",
+  "before_rows": 32778,
+  "unmapped_transaction_type_set_to_unknown": 0,
+  "invalid_transaction_date_rows_dropped": 0,
+  "invalid_amount_inr_rows_dropped": 0,
+  "non_positive_amount_inr_rows_removed": 0,
+  "unmapped_kyc_status_set_to_unknown": 0,
+  "invalid_amfi_code_rows_dropped": 0,
+  "duplicate_rows_removed": 0,
+  "output_rows": 32778,
+  "transaction_type_value_counts": {
+    "SIP": 19716,
+    "Lumpsum": 8095,
+    "Redemption": 4967
+  },
+  "kyc_status_value_counts": {
+    "Verified": 30146,
+    "Pending": 2632
+  }
+}

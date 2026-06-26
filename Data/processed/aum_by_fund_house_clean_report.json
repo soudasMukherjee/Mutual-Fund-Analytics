@@ -1,0 +1,15 @@
+{
+  "input_path": "C:\\Mutual Fund Analytics\\Data\\raw\\03_aum_by_fund_house.csv",
+  "before_rows": 90,
+  "invalid_date_coerced": 0,
+  "non_numeric_aum_lakh_crore_coerced": 0,
+  "non_numeric_aum_crore_coerced": 0,
+  "non_numeric_num_schemes_coerced": 0,
+  "duplicate_rows_removed": 0,
+  "negative_value_counts_by_column": {
+    "aum_lakh_crore": 0,
+    "aum_crore": 0,
+    "num_schemes": 0
+  },
+  "output_rows": 90
+}

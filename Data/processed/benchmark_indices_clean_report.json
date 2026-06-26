@@ -1,0 +1,12 @@
+{
+  "input_path": "C:\\Mutual Fund Analytics\\Data\\raw\\10_benchmark_indices.csv",
+  "before_rows": 8050,
+  "invalid_date_coerced": 0,
+  "non_numeric_close_value_coerced": 0,
+  "duplicate_rows_removed": 0,
+  "negative_value_counts_by_column": {
+    "close_value": 0
+  },
+  "output_rows": 8050,
+  "duplicate_date_index_rows_removed_extra": 0
+}

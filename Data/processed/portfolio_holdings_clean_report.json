@@ -1,0 +1,15 @@
+{
+  "input_path": "C:\\Mutual Fund Analytics\\Data\\raw\\09_portfolio_holdings.csv",
+  "before_rows": 322,
+  "invalid_portfolio_date_coerced": 0,
+  "non_numeric_weight_pct_coerced": 0,
+  "non_numeric_market_value_cr_coerced": 0,
+  "non_numeric_current_price_inr_coerced": 0,
+  "duplicate_rows_removed": 0,
+  "negative_value_counts_by_column": {
+    "weight_pct": 0,
+    "market_value_cr": 0,
+    "current_price_inr": 0
+  },
+  "output_rows": 322
+}

@@ -1,0 +1,7 @@
+{
+  "input_path": "C:\\Mutual Fund Analytics\\Data\\raw\\05_category_inflows.csv",
+  "before_rows": 144,
+  "non_numeric_net_inflow_crore_coerced": 0,
+  "duplicate_rows_removed": 0,
+  "output_rows": 144
+}
