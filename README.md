@@ -135,51 +135,31 @@ Examples of processed outputs present in this repo:
 
 ---
 
-### `notebooks/day_4_alpha_beta_ols_nifty100.ipynb`
-**Purpose**: Alpha/beta computation specifically for a Nifty 100 benchmark universe.
+### `notebooks/day_1.ipynb`
+**Purpose**: Initial setup / baseline cleaning + early exploration.
 
-**Outputs:**
-- Alpha/beta dataset updates for that benchmark context
-
----
-
-### `notebooks/day_4_compute_all_daily_returns_cagr_comparison.ipynb`
-**Purpose**: Builds daily returns and the data needed for CAGR comparisons.
-
-**Outputs:**
-- `Data/processed/daily_returns_all_schemes.csv`
-- CAGR comparison CSVs such as `Data/processed/cagr_comparison_1yr_3yr_5yr.csv`
+**Outputs**:
+- Intermediate artifacts used by later notebooks (often via `Data/processed/`)
 
 ---
 
-### `notebooks/day_4_compute_cagr_and_comparison_table.ipynb`
-**Purpose**: Generates CAGR summary tables for reporting.
+### `notebooks/day_3.ipynb`
+**Purpose**: Additional performance analytics preparation steps.
 
-**Outputs:**
-- `Data/processed/cagr_comparison_1yr_3yr_5yr.csv`
-- Additional comparison tables used downstream
-
----
-
-### `notebooks/day_4_compute_daily_returns_and_validate.ipynb`
-**Purpose**: Validates daily return calculations.
-
-**Outputs:**
-- Validation diagnostics (may not be written to disk)
-- Ensures downstream metrics use reliable returns
+**Outputs**:
+- Intermediate artifacts consumed by later performance/risk notebooks
 
 ---
 
-### `notebooks/day_4_sharpe_sortino_ranked.ipynb`
-**Purpose**: Computes Sharpe/Sortino ratios and produces ranked views.
+### `notebooks/day_4_*` (not present in this checkout)
+The README previously listed multiple `day_4_*` notebooks (alpha/beta, daily returns, CAGR tables, Sharpe/Sortino ranking). In the current repository state, those `day_4_*` notebook files are **not present** under `notebooks/`.
 
-**Outputs:**
-- `Data/processed/sharpe_ratio_ranked_rf6_5.csv`
-- `Data/processed/sharpe_sortino_ranked_rf6_5.csv`
+If you expect them to exist, they may have been renamed or were not included in the last push.
 
 ---
 
 ### `notebooks/aum_growth_grouped_bar_seaborn.ipynb`
+
 **Purpose**: Visualizes AUM growth trends by grouping.
 
 **Outputs:**
