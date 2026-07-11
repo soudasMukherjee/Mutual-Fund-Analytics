@@ -1,0 +1,37 @@
+{
+  "input_csv": "Data\\processed\\investor_transactions_clean.csv",
+  "output_csv": "Data\\processed\\investor_cohort_analysis_first_tx_year.csv",
+  "output_json": "Data\\processed\\investor_cohort_analysis_first_tx_year.json",
+  "definitions": {
+    "cohort": "Group investors by year of their first transaction_date (earliest transaction per investor_id).",
+    "avg_sip_amount_inr": "Mean amount_inr across all SIP transactions (transaction_type == 'SIP') made by investors in that cohort (transaction-level mean).",
+    "total_invested_inr": "Sum of amount_inr for transactions with transaction_type in ['SIP','Lumpsum'] across all investor history within each cohort.",
+    "top fund preference": "Two metrics computed from SIP transactions within the cohort: (1) most preferred by SIP count (amfi_code with max SIP tx count), (2) most preferred by SIP invested amount (amfi_code with max sum(amount_inr) for SIP)."
+  },
+  "shape": {
+    "rows": 2,
+    "columns": 8
+  },
+  "preview": [
+    {
+      "first_tx_year": 2024,
+      "num_investors": 4770,
+      "total_invested_inr": 2258062304,
+      "avg_sip_amount_inr": 10996.885825361911,
+      "top_fund_by_sip_count_amfi_code": 120504,
+      "top_fund_by_sip_count_tx": 536,
+      "top_fund_by_sip_amount_amfi_code": 125498,
+      "top_fund_by_sip_amount_sum_inr": 6268480
+    },
+    {
+      "first_tx_year": 2025,
+      "num_investors": 173,
+      "total_invested_inr": 18992635,
+      "avg_sip_amount_inr": 13505.209580838324,
+      "top_fund_by_sip_count_amfi_code": 119599,
+      "top_fund_by_sip_count_tx": 8,
+      "top_fund_by_sip_amount_amfi_code": 119599,
+      "top_fund_by_sip_amount_sum_inr": 174133
+    }
+  ]
+}

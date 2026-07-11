@@ -1,0 +1,73 @@
+2026-07-11 04:04:28 [INFO] ======================================================================
+2026-07-11 04:04:28 [INFO] NAV ETL run started
+2026-07-11 04:04:28 [INFO] Fetching NAV for 40 schemes from mfapi.in ...
+2026-07-11 04:04:33 [WARNING] Scheme 100016: fetched OK but returned 0 usable NAV rows.
+2026-07-11 04:04:34 [WARNING] Scheme 100025: fetched OK but returned 0 usable NAV rows.
+2026-07-11 04:04:36 [INFO] [3/40] Scheme 100033: OK (4989 NAV rows, latest=2026-07-10)
+2026-07-11 04:04:37 [INFO] [4/40] Scheme 101206: OK (7045 NAV rows, latest=2026-07-10)
+2026-07-11 04:04:38 [INFO] [5/40] Scheme 101207: OK (111 NAV rows, latest=2006-09-11)
+2026-07-11 04:04:40 [INFO] [6/40] Scheme 101208: OK (111 NAV rows, latest=2006-09-11)
+2026-07-11 04:04:59 [INFO] [7/40] Scheme 102885: OK (4978 NAV rows, latest=2026-07-10)
+2026-07-11 04:05:00 [WARNING] Scheme 102886: fetched OK but returned 0 usable NAV rows.
+2026-07-11 04:05:01 [WARNING] Scheme 102887: fetched OK but returned 0 usable NAV rows.
+2026-07-11 04:05:03 [INFO] [10/40] Scheme 118632: OK (3326 NAV rows, latest=2026-07-10)
+2026-07-11 04:05:04 [INFO] [11/40] Scheme 118633: OK (3325 NAV rows, latest=2026-07-10)
+2026-07-11 04:05:05 [INFO] [12/40] Scheme 118634: OK (3325 NAV rows, latest=2026-07-10)
+2026-07-11 04:05:24 [WARNING] Scheme 118635: fetched OK but returned 0 usable NAV rows.
+2026-07-11 04:05:26 [INFO] [14/40] Scheme 118636: OK (1167 NAV rows, latest=2016-11-25)
+2026-07-11 04:05:27 [INFO] [15/40] Scheme 119092: OK (3593 NAV rows, latest=2026-07-10)
+2026-07-11 04:05:28 [INFO] [16/40] Scheme 119093: OK (3593 NAV rows, latest=2026-07-10)
+2026-07-11 04:05:30 [INFO] [17/40] Scheme 119094: OK (3593 NAV rows, latest=2026-07-10)
+2026-07-11 04:05:36 [INFO] [18/40] Scheme 119095: OK (3328 NAV rows, latest=2026-07-10)
+2026-07-11 04:05:38 [INFO] [19/40] Scheme 119120: OK (3265 NAV rows, latest=2026-07-10)
+2026-07-11 04:05:39 [INFO] [20/40] Scheme 119551: OK (3264 NAV rows, latest=2026-07-10)
+2026-07-11 04:05:40 [INFO] [21/40] Scheme 119552: OK (3264 NAV rows, latest=2026-07-10)
+2026-07-11 04:05:42 [INFO] [22/40] Scheme 119598: OK (3335 NAV rows, latest=2026-07-10)
+2026-07-11 04:05:43 [INFO] [23/40] Scheme 119599: OK (873 NAV rows, latest=2016-07-22)
+2026-07-11 04:05:56 [INFO] [24/40] Scheme 120503: OK (3335 NAV rows, latest=2026-07-10)
+2026-07-11 04:05:57 [INFO] [25/40] Scheme 120504: OK (3335 NAV rows, latest=2026-07-10)
+2026-07-11 04:05:58 [INFO] [26/40] Scheme 120505: OK (3335 NAV rows, latest=2026-07-10)
+2026-07-11 04:06:00 [INFO] [27/40] Scheme 120506: OK (3262 NAV rows, latest=2026-07-10)
+2026-07-11 04:06:01 [INFO] [28/40] Scheme 120507: OK (3262 NAV rows, latest=2026-07-10)
+2026-07-11 04:06:12 [INFO] [29/40] Scheme 120841: OK (3329 NAV rows, latest=2026-07-10)
+2026-07-11 04:06:13 [INFO] [30/40] Scheme 120842: OK (3329 NAV rows, latest=2026-07-10)
+2026-07-11 04:06:14 [INFO] [31/40] Scheme 120843: OK (3329 NAV rows, latest=2026-07-10)
+2026-07-11 04:06:16 [INFO] [32/40] Scheme 120844: OK (1989 NAV rows, latest=2021-02-12)
+2026-07-11 04:06:17 [INFO] [33/40] Scheme 125497: OK (3119 NAV rows, latest=2026-07-10)
+2026-07-11 04:06:34 [INFO] [34/40] Scheme 125498: OK (3061 NAV rows, latest=2026-07-10)
+2026-07-11 04:06:35 [INFO] [35/40] Scheme 148567: OK (1388 NAV rows, latest=2026-07-10)
+2026-07-11 04:06:36 [WARNING] Scheme 148568: fetched OK but returned 0 usable NAV rows.
+2026-07-11 04:06:38 [INFO] [37/40] Scheme 148569: OK (1388 NAV rows, latest=2026-07-10)
+2026-07-11 04:06:39 [INFO] [38/40] Scheme 149322: OK (1129 NAV rows, latest=2026-07-10)
+2026-07-11 04:06:56 [INFO] [39/40] Scheme 149323: OK (1129 NAV rows, latest=2026-07-10)
+2026-07-11 04:06:57 [INFO] [40/40] Scheme 149324: OK (1129 NAV rows, latest=2026-07-10)
+2026-07-11 04:06:59 [INFO] Merged into 02_nav_history.csv: 46000 -> 112062 rows (66062 new/updated).
+2026-07-11 04:06:59 [INFO] Re-running cleaning pipeline: C:\Mutual Fund Analytics\scripts\clean_all_datasets.py
+2026-07-11 04:07:01 [INFO] clean_all_datasets.py stdout:
+Cleaning 02_nav_history.csv ...
+Cleaning 08_investor_transactions.csv ...
+Cleaning 07_scheme_performance.csv ...
+Cleaning 01_fund_master.csv ...
+Cleaning 03_aum_by_fund_house.csv ...
+Cleaning 04_monthly_sip_inflows.csv ...
+Cleaning 05_category_inflows.csv ...
+Cleaning 06_industry_folio_count.csv ...
+Cleaning 09_portfolio_holdings.csv ...
+Cleaning 10_benchmark_indices.csv ...
+
+All 10 datasets cleaned. Output row counts:
+  nav_history             : 173,452
+  investor_transactions   :  32,778
+  scheme_performance      :      40
+  fund_master             :      40
+  aum_by_fund_house       :      90
+  monthly_sip_inflows     :      48
+  category_inflows        :     144
+  industry_folio_count    :      21
+  portfolio_holdings      :     322
+  benchmark_indices       :   8,050
+2026-07-11 04:07:01 [INFO] Cleaning pipeline completed successfully.
+2026-07-11 04:07:01 [INFO] Summary: 34/40 schemes succeeded. Failed codes: [100016, 100025, 102886, 102887, 118635, 148568]
+2026-07-11 04:07:01 [INFO] Log file: C:\Mutual Fund Analytics\logs\nav_etl_20260711_040428.log
+2026-07-11 04:07:01 [INFO] NAV ETL run finished (cleaning_ok=True)
+2026-07-11 04:07:01 [INFO] ======================================================================
