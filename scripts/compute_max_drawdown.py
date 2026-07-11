@@ -43,7 +43,7 @@ def main() -> None:
     fund_df = fund_df.dropna(subset=["amfi_code", "scheme_name"]).copy()
 
     name_map = (
-        fund_df.drop_duplicates(subset=["amfi_code"])
+        fund_df.drop_duplicates(subset=["amfi_code"]) 
         .set_index("amfi_code")["scheme_name"]
         .to_dict()
     )
@@ -65,10 +65,7 @@ def main() -> None:
         worst_date = worst_ts.date() if pd.notna(worst_ts) else None
 
         # Find peak date preceding/at worst trough.
-        # Robust tie-handling: peak is the LAST date with the maximum drawdown-max (i.e., running max)
-        # within the window up to worst_idx.
         dd_to_worst = drawdown.loc[:worst_idx]
-        # running_max is a series; last peak occurs where running_max is highest within the window.
         peak_idx_candidates = (
             running_max.loc[:worst_idx] == running_max.loc[:worst_idx].max()
         )
@@ -87,7 +84,7 @@ def main() -> None:
         )
 
     out_df = pd.DataFrame(rows)
-    out_df = out_df.sort_values(["max_drawdown_pct", "amfi_code"], ascending=[True, True])  # most negative first
+    out_df = out_df.sort_values(["max_drawdown_pct", "amfi_code"], ascending=[True, True])
 
     out_df.to_csv(out_path, index=False)
 
@@ -96,4 +93,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-
