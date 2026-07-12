@@ -157,6 +157,11 @@ The project generates many outputs under Data/processed/ and reports/ including:
 
 ---
 
+## Live Deployment
+The Streamlit dashboard is now live at:
+
+https://mutual-fund-analytic.streamlit.app/
+
 ## Setup Instructions
 1. Install required packages:
    ```bash

@@ -16,6 +16,12 @@ the `.pbix` deliverable is replaced by the `streamlit_app/` folder itself (the
 Streamlit equivalent of "the dashboard file"), plus `Dashboard.pdf` and the 4 page
 PNGs, which **are** fully reproduced.
 
+## Live Deployment
+
+The dashboard is currently deployed at:
+
+https://mutual-fund-analytic.streamlit.app/
+
 ## Setup
 
 ```bash
