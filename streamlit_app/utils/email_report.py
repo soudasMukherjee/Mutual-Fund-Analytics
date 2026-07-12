@@ -73,17 +73,21 @@ def _rows_html(df: pd.DataFrame, cols: list[str], pct_cols: list[str]) -> str:
     return "\n".join(rows)
 
 
-def compute_weekly_movers(nav_long: pd.DataFrame, top_n: int = 5) -> pd.DataFrame:
-    """1-week (5 trading-day) NAV % change per scheme, from the daily NAV history."""
+def compute_weekly_movers(nav_long: pd.DataFrame, top_n: int = 5, lookback_days: int = 5) -> pd.DataFrame:
+    """N-trading-day NAV % change per scheme, from the daily NAV history.
+    ``lookback_days`` is the number of trading days back to compare against
+    (5 = 1 trading week, the default weekly-report window).
+    """
     df = nav_long.sort_values(["scheme_name", "date"]).copy()
+    span = lookback_days + 1
 
-    def _pct_change_5d(group: pd.DataFrame) -> float:
+    def _pct_change(group: pd.DataFrame) -> float:
         group = group.sort_values("date")
-        if len(group) < 6:
+        if len(group) < span:
             return float("nan")
-        return (group["nav"].iloc[-1] / group["nav"].iloc[-6] - 1) * 100
+        return (group["nav"].iloc[-1] / group["nav"].iloc[-span] - 1) * 100
 
-    movers = df.groupby("scheme_name").apply(_pct_change_5d, include_groups=False)
+    movers = df.groupby("scheme_name").apply(_pct_change, include_groups=False)
     movers = movers.rename("week_change_pct").reset_index().dropna()
     return movers.sort_values("week_change_pct", ascending=False)
 
@@ -95,10 +99,11 @@ def build_weekly_report_html(
     aum_by_house: pd.DataFrame,
     report_date: datetime | None = None,
     top_n: int = 5,
+    lookback_days: int = 5,
 ) -> str:
     report_date = report_date or datetime.now()
 
-    movers = compute_weekly_movers(nav_long, top_n=top_n)
+    movers = compute_weekly_movers(nav_long, top_n=top_n, lookback_days=lookback_days)
     top_gainers = movers.head(top_n)
     top_losers = movers.tail(top_n).sort_values("week_change_pct")
 

@@ -9,7 +9,7 @@ import streamlit.components.v1 as components
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from utils.data_loader import (
-    load_fund_scorecard, load_daily_returns_long, load_fact_sip_industry, load_fact_aum,
+    load_fund_scorecard, load_daily_returns_long, load_fact_sip_industry, load_fact_aum, load_dim_fund,
 )
 from utils.email_report import SMTPConfig, build_weekly_report_html, send_email
 from utils.theme import register_plotly_template, inject_global_css, render_sidebar_brand, page_title
@@ -34,13 +34,30 @@ if "year_month" in sip_inflows.columns and "month" not in sip_inflows.columns:
     sip_inflows = sip_inflows.rename(columns={"year_month": "month"})
 aum_by_house = load_fact_aum()
 
+# ---------------------------------------------------------------------------
+# Filters
+# ---------------------------------------------------------------------------
+st.sidebar.markdown("### 🎚️ Filters")
+
 top_n = st.sidebar.slider("Movers / top-funds shown", 3, 10, 5)
+lookback_days = st.sidebar.select_slider(
+    "Movers lookback window (trading days)", options=[5, 10, 15, 20], value=5,
+)
+
+fund_master = load_dim_fund()
+scorecard_with_category = fund_scorecard.merge(
+    fund_master[["amfi_code", "category"]], on="amfi_code", how="left",
+)
+all_categories = sorted(scorecard_with_category["category"].dropna().unique())
+selected_categories = st.sidebar.multiselect("Fund categories (top-rated table)", options=all_categories, default=all_categories)
+scorecard_filtered = scorecard_with_category[scorecard_with_category["category"].isin(selected_categories)] \
+    if selected_categories else scorecard_with_category.iloc[0:0]
 
 report_date = datetime.now()
 html = build_weekly_report_html(
-    fund_scorecard=fund_scorecard, nav_long=nav_long,
+    fund_scorecard=scorecard_filtered, nav_long=nav_long,
     sip_inflows=sip_inflows, aum_by_house=aum_by_house,
-    report_date=report_date, top_n=top_n,
+    report_date=report_date, top_n=top_n, lookback_days=lookback_days,
 )
 
 st.markdown("### 👁️ Live Preview")

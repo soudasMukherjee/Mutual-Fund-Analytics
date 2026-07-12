@@ -36,14 +36,14 @@ Opens at `http://localhost:8501`. Use the sidebar to move between pages:
 | Page | File |
 |---|---|
 | Home (data connection status) | `app.py` |
-| 1 · Industry Overview | `pages/1_📊_Industry_Overview.py` |
-| 2 · Fund Performance | `pages/2_📈_Fund_Performance.py` |
-| 3 · Investor Analytics | `pages/3_👥_Investor_Analytics.py` |
-| 4 · SIP & Market Trends | `pages/4_💰_SIP_and_Market_Trends.py` |
-| NAV Detail (drill-through target) | `pages/5_🔍_NAV_Detail.py` |
-| 6 · Monte Carlo NAV Projection | `pages/6_🎲_Monte_Carlo_Projection.py` |
-| 7 · Efficient Frontier (Markowitz) | `pages/7_📐_Efficient_Frontier.py` |
-| 8 · Automated Weekly Email Report | `pages/8_📧_Automated_Email_Report.py` |
+| 1 · Industry Overview | `pages/1_Industry_Overview.py` |
+| 2 · Fund Performance | `pages/2_Fund_Performance.py` |
+| 3 · Investor Analytics | `pages/3_Investor_Analytics.py` |
+| 4 · SIP & Market Trends | `pages/4_SIP_and_Market_Trends.py` |
+| NAV Detail (drill-through target) | `pages/5_NAV_Detail.py` |
+| 6 · Monte Carlo NAV Projection | `pages/6_Monte_Carlo_Projection.py` |
+| 7 · Efficient Frontier (Markowitz) | `pages/7_Efficient_Frontier.py` |
+| 8 · Automated Weekly Email Report | `pages/8_Automated_Email_Report.py` |
 
 ## Beyond the Power BI brief — bonus analytics pages
 

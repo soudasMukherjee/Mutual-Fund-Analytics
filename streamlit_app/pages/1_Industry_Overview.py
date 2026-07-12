@@ -28,6 +28,22 @@ sip = load_fact_sip_industry()
 folio = load_folio_counts()
 funds = load_dim_fund()
 
+# ---------------------------------------------------------------------------
+# Filters
+# ---------------------------------------------------------------------------
+st.sidebar.markdown("### 🎚️ Filters")
+
+all_houses = sorted(aum["fund_house"].unique())
+selected_houses = st.sidebar.multiselect("Fund houses", options=all_houses, default=all_houses)
+
+date_min, date_max = aum["date"].min().to_pydatetime(), aum["date"].max().to_pydatetime()
+trend_start, trend_end = st.sidebar.slider(
+    "AUM trend date range", min_value=date_min, max_value=date_max,
+    value=(date_min, date_max), format="MMM YYYY",
+)
+
+aum_filtered = aum[aum["fund_house"].isin(selected_houses)] if selected_houses else aum.iloc[0:0]
+
 latest_aum_date = aum["date"].max()
 total_aum_latest = aum.loc[aum["date"] == latest_aum_date, "aum_crore"].sum()
 total_schemes_latest = aum.loc[aum["date"] == latest_aum_date, "num_schemes"].sum()
@@ -79,7 +95,8 @@ left, right = st.columns([3, 2])
 
 with left:
     st.markdown("### 📈 Industry AUM Trend (2022–2025)")
-    aum_trend = aum.groupby("date", as_index=False)["aum_crore"].sum()
+    trend_mask = (aum_filtered["date"] >= pd.Timestamp(trend_start)) & (aum_filtered["date"] <= pd.Timestamp(trend_end))
+    aum_trend = aum_filtered[trend_mask].groupby("date", as_index=False)["aum_crore"].sum()
     aum_trend["aum_lakh_crore"] = aum_trend["aum_crore"] / 1e5
 
     fig_trend = go.Figure()
@@ -99,7 +116,7 @@ with left:
 with right:
     st.markdown("### 🏦 AUM by AMC (latest)")
     amc_latest = (
-        aum[aum["date"] == latest_aum_date]
+        aum_filtered[aum_filtered["date"] == latest_aum_date]
         .sort_values("aum_crore", ascending=True)
         .assign(aum_lakh_crore=lambda d: d["aum_crore"] / 1e5)
     )

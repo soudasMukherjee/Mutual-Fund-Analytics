@@ -29,6 +29,22 @@ bm = load_benchmark_indices()
 cat = load_category_inflows()
 
 # ---------------------------------------------------------------------------
+# Filters
+# ---------------------------------------------------------------------------
+st.sidebar.markdown("### 🎚️ Filters")
+
+all_categories = sorted(cat["category"].unique())
+selected_categories = st.sidebar.multiselect("Fund categories", options=all_categories, default=all_categories)
+top_n = st.sidebar.slider("Top N categories (net inflow)", min_value=3, max_value=max(3, len(all_categories)), value=5)
+
+months_sorted = sorted(sip["year_month"].unique())
+month_start, month_end = st.sidebar.select_slider(
+    "SIP / Nifty trend range", options=months_sorted, value=(months_sorted[0], months_sorted[-1]),
+)
+
+cat_filtered = cat[cat["category"].isin(selected_categories)] if selected_categories else cat.iloc[0:0]
+
+# ---------------------------------------------------------------------------
 # Dual-axis: SIP inflow (bar) + Nifty 50 (line), 2022-2025
 # ---------------------------------------------------------------------------
 st.markdown("### 📊 SIP Inflow vs Nifty 50 (2022–2025)")
@@ -38,6 +54,7 @@ nifty["year_month"] = nifty["date"].dt.to_period("M").astype(str)
 nifty_monthly = nifty.groupby("year_month", as_index=False)["close_value"].last()
 
 merged = sip.merge(nifty_monthly, on="year_month", how="left").sort_values("year_month")
+merged = merged[(merged["year_month"] >= month_start) & (merged["year_month"] <= month_end)]
 
 fig_dual = make_subplots(specs=[[{"secondary_y": True}]])
 fig_dual.add_trace(
@@ -70,7 +87,7 @@ left, right = st.columns([3, 2])
 # ---------------------------------------------------------------------------
 with left:
     st.markdown("### 🔥 Category Inflow Heatmap (FY25)")
-    pivot = cat.pivot_table(index="category", columns="month", values="net_inflow_crore", aggfunc="sum")
+    pivot = cat_filtered.pivot_table(index="category", columns="month", values="net_inflow_crore", aggfunc="sum")
     pivot = pivot.reindex(sorted(pivot.columns), axis=1)
     fig_heat = px.imshow(
         pivot, color_continuous_scale=[NEGATIVE, "#FFFFFF", PRIMARY],
@@ -85,11 +102,11 @@ with left:
 # Top 5 categories by net inflow FY25
 # ---------------------------------------------------------------------------
 with right:
-    st.markdown("### 🏅 Top 5 Categories by Net Inflow (FY25)")
+    st.markdown(f"### 🏅 Top {top_n} Categories by Net Inflow (FY25)")
     top5 = (
-        cat.groupby("category", as_index=False)["net_inflow_crore"].sum()
+        cat_filtered.groupby("category", as_index=False)["net_inflow_crore"].sum()
         .sort_values("net_inflow_crore", ascending=False)
-        .head(5)
+        .head(top_n)
     )
     fig_top5 = px.bar(
         top5.sort_values("net_inflow_crore"), x="net_inflow_crore", y="category", orientation="h",
@@ -102,7 +119,7 @@ with right:
 
 with st.expander("📋 Full FY25 category inflow table"):
     st.dataframe(
-        cat.groupby("category", as_index=False)["net_inflow_crore"].sum()
+        cat_filtered.groupby("category", as_index=False)["net_inflow_crore"].sum()
         .sort_values("net_inflow_crore", ascending=False),
         use_container_width=True, hide_index=True,
     )

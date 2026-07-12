@@ -67,6 +67,17 @@ st.divider()
 # ---------------------------------------------------------------------------
 fund_nav = nav_df[nav_df["amfi_code"] == amfi_code].sort_values("date")
 
+st.sidebar.markdown("### 🎚️ Filters")
+show_benchmark = st.sidebar.checkbox("Show benchmark overlay", value=True)
+
+if not fund_nav.empty:
+    nav_date_min, nav_date_max = fund_nav["date"].min().to_pydatetime(), fund_nav["date"].max().to_pydatetime()
+    range_start, range_end = st.sidebar.slider(
+        "NAV chart date range", min_value=nav_date_min, max_value=nav_date_max,
+        value=(nav_date_min, nav_date_max), format="MMM YYYY",
+    )
+    fund_nav = fund_nav[(fund_nav["date"] >= range_start) & (fund_nav["date"] <= range_end)]
+
 fig = go.Figure()
 fig.add_trace(go.Scatter(
     x=fund_nav["date"], y=fund_nav["nav"], mode="lines",
@@ -75,7 +86,7 @@ fig.add_trace(go.Scatter(
 ))
 
 index_key = BENCHMARK_NAME_TO_INDEX.get(fund_row["benchmark"])
-if index_key:
+if index_key and show_benchmark:
     bm_df = load_benchmark_indices()
     bm_series = bm_df[bm_df["index_name"] == index_key].sort_values("date")
     if not fund_nav.empty:
