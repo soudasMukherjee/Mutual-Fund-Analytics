@@ -1,256 +1,200 @@
-# Mutual Fund Analytics (Capstone)
+# Mutual Fund Analytics (Capstone Project)
 
-## Table of Contents
-- Project Overview
-- Tech Stack (with logos)
-- Dataset & Outputs (Data/)
-- Project Structure
-- Notebooks (what each one does + outputs)
-- Scripts (what they do)
-- Setup & Execution
-- Reproducibility Notes
+This repository is a complete end-to-end analytics project for mutual funds. It combines data cleaning, exploratory analysis, performance calculations, risk assessment, and an interactive Streamlit dashboard to turn raw mutual fund data into business-friendly insights.
 
----
+## Tech Stack
 
-## Project Overview
-This repository performs end-to-end analytics for mutual funds using cleaned datasets (NAV history, fund master, portfolio holdings, inflows/SIP, investor transactions, benchmarks, etc.). It then computes performance metrics such as:
-- CAGR comparisons
-- daily returns / rolling analytics
-- Sharpe/Sortino (ranked views)
-- tracking error vs benchmarks
-- alpha/beta (OLS regression)
-- maximum drawdown
-- scorecards / fund quality summaries
+![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white) ![Jupyter](https://img.shields.io/badge/Jupyter-F37626?logo=jupyter&logoColor=white) ![Pandas](https://img.shields.io/badge/Pandas-150458?logo=pandas&logoColor=white) ![NumPy](https://img.shields.io/badge/NumPy-013243?logo=numpy&logoColor=white) ![Matplotlib](https://img.shields.io/badge/Matplotlib-11557c?logo=matplotlib&logoColor=white) ![Seaborn](https://img.shields.io/badge/Seaborn-4C72B0?logo=seaborn&logoColor=white) ![Plotly](https://img.shields.io/badge/Plotly-3F4F75?logo=plotly&logoColor=white) ![SQLite](https://img.shields.io/badge/SQLite-003B57?logo=sqlite&logoColor=white) ![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?logo=streamlit&logoColor=white)
 
-The repo is organized as:
-- **Data/raw/**: raw CSV extracts (and a PDF reference)
-- **Data/processed/**: cleaned CSVs + JSON summaries + generated images
-- **notebooks/**: analysis/visualization pipelines
-- **scripts/**: batch utilities (cleaning, feature computation, database load)
-- **sql/**: schema + query templates
+### Software used in this project
+- Python for data processing and automation
+- Jupyter Notebook for analysis and visualization
+- Pandas and NumPy for data manipulation
+- Matplotlib, Seaborn, and Plotly for charts and dashboards
+- SQLite for structured data storage
+- Streamlit for the interactive dashboard experience
+- SQLAlchemy and requests for data handling and integrations
 
 ---
 
-## Tech Stack (with logos)
-Below are the technologies used in this project. (Logos are represented as plain text placeholders to keep this README self-contained.)
-
-- **Python**: 🐍 Python
-- **Jupyter Notebook**: 📓 Jupyter
-- **Pandas**: 📚 pandas
-- **NumPy**: 🔢 NumPy
-- **Matplotlib**: 📈 Matplotlib
-- **Seaborn**: 🌊 Seaborn
-- **Plotly**: ⚡ Plotly
-- **Statsmodels**: 🧠 statsmodels (for OLS alpha/beta)
-- **Scikit-learn (optional)**: 🤖 (if used in notebooks)
-- **SQLite**: 🗄️ SQLite (via `bluestock_mf.db` / SQL folder)
-
-> If you want *actual embedded logo images*, provide the image files (or allow remote URLs) and I’ll update the README with `<img>` tags.
+## Project Goal
+The project aims to answer important questions such as:
+- Which mutual funds performed best over different time horizons?
+- How do funds compare against benchmarks like Nifty 50 and Nifty 100?
+- What is the relationship between risk and return?
+- How do SIP inflows and investor behavior vary over time?
+- How can the findings be presented in a clean dashboard for business users?
 
 ---
 
-## Dataset & Outputs
-### Input Sources
-- CSV extracts under `Data/raw/`
-- Reference PDF: `Data/raw/Bluestock_MF_Capstone_Project.pdf`
+## Main Tasks in the Project
 
-### Processed Outputs
-All computed/cleaned artifacts are written under:
-- `Data/processed/*.csv`
-- `Data/processed/*.json`
-- `Data/processed/*.png`
+### 1. Data Ingestion and Cleaning
+This is the foundation of the project. Raw files are collected and prepared into clean datasets for analysis.
 
-Examples of processed outputs present in this repo:
-- `nav_history_clean.csv`
-- `daily_returns_all_schemes.csv`
-- `scheme_performance_clean.csv`
-- `alpha_beta.csv`
-- `max_drawdown_by_fund.csv`
-- `sharpe_ratio_ranked_rf6_5.csv`
-- `sharpe_sortino_ranked_rf6_5.csv`
-- `tracking_error_top5_funds_vs_benchmarks.csv`
-- benchmark comparison images (e.g., Nifty50/Nifty100 top-5 comparison)
+What happens here:
+- Raw mutual fund and market data are imported
+- Missing values, formatting issues, and inconsistent values are cleaned
+- Clean files are saved into the processed data folder
+
+Key files:
+- data_ingestion.py
+- scripts/clean_all_datasets.py
+- scripts/clean_nav_history.py
+
+Output examples:
+- Data/processed/nav_history_clean.csv
+- Data/processed/investor_transactions_clean.csv
+- Data/processed/category_inflows_clean.csv
+
+---
+
+### 2. Exploratory Data Analysis (EDA)
+This step helps understand the structure, trends, and quality of the data before deeper analysis.
+
+What happens here:
+- Distribution of NAVs and AUM values is studied
+- Fund categories and investor behaviors are explored
+- Trends in inflows and market movement are identified
+- Charts are created to uncover business insights
+
+Key notebooks:
+- notebooks/EDA_Analysis.ipynb
+- notebooks/Performance_Analytics.ipynb
+
+Output examples:
+- Charts under reports/eda_png/
+- Summary JSON and CSV files in Data/processed/
+
+---
+
+### 3. Performance and Risk Analytics
+This step calculates the actual fund performance metrics that investors care about.
+
+What happens here:
+- Daily returns and CAGR are computed
+- Sharpe ratio, Sortino ratio, and maximum drawdown are assessed
+- Alpha and beta are measured against benchmarks
+- Funds are ranked and compared with each other
+
+Key notebooks and scripts:
+- notebooks/alpha_beta_run.ipynb
+- notebooks/day_4_compute_all_daily_returns_cagr_comparison.ipynb
+- scripts/compute_max_drawdown.py
+
+Output examples:
+- Data/processed/alpha_beta.csv
+- Data/processed/daily_returns_all_schemes.csv
+- Data/processed/cagr_comparison_1yr_3yr_5yr.csv
+
+---
+
+### 4. Investor and SIP Analytics
+This task focuses on investor activity and investment patterns.
+
+What happens here:
+- Investor transactions are cleaned and summarized
+- SIP and lump-sum behavior are analyzed
+- State-wise and monthly transaction patterns are explored
+- Insights are built around investor participation and flow trends
+
+Key files:
+- notebooks/clean_investor_transactions.ipynb
+- notebooks/sip_inflow_monthly_plotly_alltime_high.ipynb
+
+Output examples:
+- Data/processed/investor_transactions_clean.csv
+- Data/processed/monthly_sip_inflows_clean.csv
+
+---
+
+### 5. Interactive Streamlit Dashboard
+The final step turns the analytical work into a presentation-ready dashboard.
+
+What this dashboard does:
+- Shows industry-level fund and AUM insights
+- Displays fund performance with risk-return comparisons
+- Provides investor analytics and SIP trends
+- Lets users explore key charts in an interactive way
+
+Dashboard entry point:
+- streamlit_app/app.py
+
+Related files:
+- streamlit_app/utils/
+- streamlit_app/pages/
+- streamlit_app/export_report.py
 
 ---
 
 ## Project Structure
-- `data_ingestion.py` (root): data ingest / preparation entry point
-- `live_nav_fetch.py` (root): optional live NAV fetch helper
-- `temp_clean_investor_transactions_run.py` (root): helper for investor transaction cleaning runs
-- `notebooks/`: interactive analysis + visualization
-- `scripts/`:
-  - `clean_all_datasets.py`
-  - `clean_nav_history.py`
-  - `compute_max_drawdown.py`
-  - `load_to_sqlite.py`
-- `sql/`:
-  - `schema.sql`: SQLite schema
-  - `queries.sql`: query templates
+- data_ingestion.py: entry point for data preparation
+- live_nav_fetch.py: optional helper for live NAV data
+- temp_clean_investor_transactions_run.py: helper for transaction cleaning runs
+- notebooks/: analysis and visualization notebooks
+- scripts/: reusable Python scripts for cleaning and analytics
+- sql/: schema and query templates
+- streamlit_app/: interactive dashboard application
+- Data/raw/: raw input files
+- Data/processed/: cleaned outputs and generated artifacts
+- reports/: exported charts and summary outputs
 
 ---
 
-## Notebooks (purpose + outputs)
+## Dataset and Outputs
+### Input data
+- CSV files in Data/raw/
+- Reference PDF in Data/raw/
 
-> Note: notebooks are executed in a typical flow. Exact cells can vary, but the intent and final artifacts are consistent.
-
-### `notebooks/Performance_Analytics.ipynb`
-**Purpose**: End-to-end performance analytics dashboard-style workflow.
-
-**What it does (high-level):**
-- Reads cleaned datasets from `Data/processed/`
-- Computes/loads performance measures (returns, CAGR comparisons, risk stats)
-- Generates figures/tables summarizing mutual fund performance across time horizons
-
-**Outputs:**
-- Intermediate/derived tables
-- Plots that feed the report/scorecards
-- May reuse artifacts such as `daily_returns_all_schemes.csv`, `alpha_beta.csv`, and ranking CSVs.
+### Processed outputs
+The project generates many outputs under Data/processed/ and reports/ including:
+- Cleaned NAV history files
+- Investor transaction datasets
+- Benchmark comparison files
+- Alpha/beta output files
+- Risk and performance charts
+- Dashboard screenshots and exported visuals
 
 ---
 
-### `notebooks/fund_scorecard_0_100.ipynb`
-**Purpose**: Generates a fund “scorecard” mapping performance/risk components into a 0–100 composite score.
-
-**What it does:**
-- Loads metric datasets (e.g., performance + risk rankings)
-- Normalizes/weights metrics into a single score
-- Produces summary tables to compare funds
-
-**Outputs:**
-- A scored fund table (often written to `Data/processed/fund_scorecard.csv`)
-- Visualizations/tables used in the final narrative
-
----
-
-### `notebooks/alpha_beta_run.ipynb`
-**Purpose**: Computes alpha and beta of funds versus selected benchmarks using regression.
-
-**What it does:**
-- Loads `daily_returns_all_schemes.csv` and benchmark return series
-- Runs an OLS regression per scheme
-- Produces alpha/beta estimates
-
-**Outputs:**
-- `Data/processed/alpha_beta.csv`
-
----
-
-### `notebooks/day_1.ipynb`
-**Purpose**: Initial setup / baseline cleaning + early exploration.
-
-**Outputs**:
-- Intermediate artifacts used by later notebooks (often via `Data/processed/`)
-
----
-
-### `notebooks/day_3.ipynb`
-**Purpose**: Additional performance analytics preparation steps.
-
-**Outputs**:
-- Intermediate artifacts consumed by later performance/risk notebooks
-
----
-
-### `notebooks/day_4_*` (not present in this checkout)
-The README previously listed multiple `day_4_*` notebooks (alpha/beta, daily returns, CAGR tables, Sharpe/Sortino ranking). In the current repository state, those `day_4_*` notebook files are **not present** under `notebooks/`.
-
-If you expect them to exist, they may have been renamed or were not included in the last push.
-
----
-
-### `notebooks/aum_growth_grouped_bar_seaborn.ipynb`
-
-**Purpose**: Visualizes AUM growth trends by grouping.
-
-**Outputs:**
-- Charts generated using Seaborn
-
----
-
-### `notebooks/category_inflow_heatmap_seaborn.ipynb`
-**Purpose**: Visualizes category inflows as heatmaps.
-
-**Outputs:**
-- Seaborn heatmap figures
-- Uses data from `Data/processed/category_inflows_clean.csv` and/or its summary JSON
-
----
-
-### `notebooks/clean_investor_transactions.ipynb`
-**Purpose**: Cleaning and preparation pipeline for investor transaction data.
-
-**Outputs:**
-- `Data/processed/investor_transactions_clean.csv`
-- `Data/processed/investor_transactions_clean_report.json`
-
----
-
-### `notebooks/clean_nav_history.ipynb`
-**Purpose**: Cleaning pipeline for NAV history.
-
-**Outputs:**
-- `Data/processed/nav_history_clean.csv`
-- `Data/processed/nav_history_clean_report.json`
-
----
-
-### `notebooks/sip_inflow_monthly_plotly_alltime_high.ipynb`
-**Purpose**: Monthly SIP inflow visualization, highlighting all-time highs.
-
-**Outputs:**
-- Plotly interactive charts
-- Uses `Data/processed/monthly_sip_inflows_clean.csv`
-
----
-
-### `notebooks/data_ingestion.py`
-**Purpose**: In-repo helper for data ingestion/standardization.
-
-**Outputs:**
-- Raw-to-processed movement depending on notebook usage
-
----
-
-### `notebooks/live_nav_fetch.py`
-**Purpose**: Helper notebook for live NAV fetching.
-
-**Outputs:**
-- Updated NAV data used for further analytics (if executed)
-
----
-
-### `notebooks/temp_clean_investor_transactions_run.py`
-**Purpose**: Utility notebook/script for running investor transaction cleaning.
-
-**Outputs:**
-- Cleaning artifacts under `Data/processed/`
-
----
-
-## Scripts (purpose)
-- `scripts/clean_all_datasets.py`: batch cleaning for all datasets
-- `scripts/clean_nav_history.py`: NAV cleaning pipeline
-- `scripts/compute_max_drawdown.py`: computes max drawdown per fund
-- `scripts/load_to_sqlite.py`: loads processed datasets into SQLite
-
----
-
-## Setup & Execution
-1. Install dependencies:
+## Setup Instructions
+1. Install required packages:
    ```bash
    pip install -r requirements.txt
    ```
-2. (Optional) Clean/prepare data using scripts:
+
+2. Run the data cleaning scripts if needed:
    ```bash
    python scripts/clean_all_datasets.py
    python scripts/compute_max_drawdown.py
    ```
-3. Run notebooks from `notebooks/` in VS Code / Jupyter.
+
+3. Start the Streamlit dashboard:
+   ```bash
+   cd streamlit_app
+   streamlit run app.py
+   ```
 
 ---
 
-## Reproducibility Notes
-- If datasets in `Data/processed/` are already present, notebooks can run directly.
-- Some notebooks may regenerate artifacts; use `Data/processed/` as the single source of derived outputs.
-- Results depend on benchmark selection and date ranges.
+## Streamlit Dashboard Outputs
+Below are sample outputs from the Streamlit dashboard.
 
+### 1. Industry Overview
+![Industry Overview Dashboard](streamlit_app/page1_industry_overview.png)
+
+### 2. Fund Performance
+![Fund Performance Dashboard](streamlit_app/page2_fund_performance.png)
+
+### 3. Investor Analytics
+![Investor Analytics Dashboard](streamlit_app/page3_investor_analytics.png)
+
+### 4. SIP and Market Trends
+![SIP and Market Trends Dashboard](streamlit_app/page4_sip_market_trends.png)
+
+---
+
+## Notes
+- The processed files in Data/processed/ are the main artifacts used by the notebooks and dashboard.
+- The Streamlit dashboard is designed to be a user-friendly alternative to a traditional BI dashboard.
+- Results depend on the quality of the raw input data and the selected benchmark windows.
